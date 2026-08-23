@@ -1,0 +1,23 @@
+@import "tailwindcss"; 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  --color-brand-bg-primary: #F7F7F5;
+  --color-brand-bg: #05080C;
+  --color-brand-surface: #121A23;
+  --color-brand-surface-2: #0B1118;
+
+  --color-brand-gold: #FFC400;
+  --color-brand-gold-strong: #FFD43B;
+  --color-brand-gold-soft: #FFD43B;
+
+  --color-brand-blue: #0066CC;
+  --color-brand-blue-strong: #1683E8;
+
+  --color-brand-text: #FFFFFF;
+  --color-brand-text-muted: #A7B0BA;
+  --color-brand-border: #263341;
+}
