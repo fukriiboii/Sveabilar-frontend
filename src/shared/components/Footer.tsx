@@ -6,11 +6,14 @@ import {
 } from 'lucide-react';
 
 import logo from '../../assets/logo.png';
+import { href } from 'react-router-dom';
 
 const quickLinks = [
   { label: 'Hem', href: '/' },
-  { label: 'Tjänster', href: '#services' },
-  { label: 'Om oss', href: '#about' },
+  { label: 'Bilar', href: '/cars' },
+  { label: 'Tjänster', href: '/services' },
+  { label: 'Om oss', href: '/about' },
+  { label: 'Integritet & cookies', href: '/policy'}
 ];
 
 export default function Footer() {

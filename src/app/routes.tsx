@@ -7,6 +7,7 @@ import HomePage from '../features/home/pages/HomePage';
 import ServicesPage from '../features/services/pages/ServicesPage';
 import AboutPage from '../features/about/pages/AboutPage';
 import CarsPage from '../features/cars/pages/CarsPage';
+import PolicyPage from '../features/policy/pages/PolicyPage';
 
 import AdminDashboard from '../features/admin/pages/AdminDashboard';
 
@@ -44,7 +45,12 @@ export const router = createBrowserRouter([
       {
         path: '/cars',
         element: <CarsPage />
-      }
+      },
+
+      {
+        path: '/policy',
+        element: <PolicyPage />,
+      },
     ],
   },
 
