@@ -8,7 +8,7 @@ import {
 const benefits = [
   {
     title: 'Kvalitet',
-    description: 'Vi utför varje arbete noggrant och professionellt.',
+    description: 'Vi utför varje jobb noggrant, professionellt och med fokus på långsiktig hållbarhet',
     icon: BadgeCheck,
   },
   {
@@ -18,55 +18,50 @@ const benefits = [
   },
   {
     title: 'Snabb service',
-    description: 'Vi hjälper dig snabbt tillbaka på vägen.',
+    description: 'Vi kommer till dig när du behöver oss och jobbar effektivt så att du snabbt kan återgå till ditt dagliga liv.',
     icon: Clock3,
   },
   {
     title: 'Kundfokus',
-    description: 'Vi anpassar våra lösningar efter dina behov.',
+    description: 'Vi anpassar lösningen efter dina behov, din tid och din bils situation.',
     icon: UsersRound,
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-brand-bg-primary px-4 py-16 sm:px-6 md:py-24">
+    <section className="bg-slate-50 px-4 py-16 sm:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
             Därför väljer kunder oss
           </p>
 
-          <h2 className="mt-3 font-serif text-3xl text-brand-bg sm:text-4xl md:text-5xl">
-            Varför välja Sveabilar?
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-slate-900 sm:text-4xl md:text-5xl">
+            Vi gör bilen enkel att ta hand om, även när den behöver hjälp på plats.
           </h2>
 
-          <p className="mt-4 text-base leading-7 text-slate-600">
-            Vi kombinerar erfarenhet, kvalitet och personlig service för att
-            göra ditt besök så enkelt och tryggt som möjligt.
+          <p className="mt-5 text-base leading-7 text-slate-600 md:text-lg">
+            När du behöver hjälp med bilen vill du känna dig trygg och få lösningen direkt.
+            Därför kommer vi till dig, löser problemet på plats och håller dig uppdaterad
+            hela vägen genom processen.
           </p>
         </div>
 
-        <div className="mt-12 grid border-y border-brand-border sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((benefit, index) => {
+        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {benefits.map((benefit) => {
             const Icon = benefit.icon;
 
             return (
               <article
                 key={benefit.title}
-                className={[
-                  'px-6 py-8 text-center',
-                  index % 2 !== 0 ? 'border-l border-brand-border' : '',
-                  index >= 2 ? 'border-t border-brand-border' : '',
-                  'lg:border-t-0',
-                  index > 0 ? 'lg:border-l' : '',
-                ].join(' ')}
+                className="group rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_18px_40px_rgba(15,23,42,0.04)] transition-all duration-250 hover:-translate-y-2 hover:shadow-[0_24px_55px_rgba(15,23,42,0.08)]"
               >
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue text-white">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gold/15 text-brand-blue ring-8 ring-brand-gold/10">
                   <Icon size={26} strokeWidth={2} />
                 </div>
 
-                <h3 className="mt-5 text-lg font-bold text-brand-bg">
+                <h3 className="mt-6 text-xl font-bold text-slate-900">
                   {benefit.title}
                 </h3>
 

@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 
 import logo from '../../assets/logo.png';
-import { href } from 'react-router-dom';
 
 const quickLinks = [
   { label: 'Hem', href: '/' },

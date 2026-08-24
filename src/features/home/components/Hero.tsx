@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../shared/components/Button';
 import heroImage from '../../../assets/heroImage.png';
 import HeroFeatures from './HeroFeatures';
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section
       className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-brand-bg bg-cover bg-center"
@@ -27,8 +30,18 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button label="Boka tid" />
-            <Button label="Kontakta oss" variant="ghost" />
+
+            <Button 
+              label="Boka tid" 
+              onClick={() => navigate('/services')} 
+            />
+
+            <Button 
+              label="Kontakta oss" 
+              variant="ghost"
+              onClick={() => navigate('/contact')} 
+            /
+            >
           </div>
         </div>
       </div>

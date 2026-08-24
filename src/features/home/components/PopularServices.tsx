@@ -3,6 +3,7 @@ import Button from '../../../shared/components/Button';
 import tireChangeImage from '../../../assets/tire-change.jpg';
 import headlightRepairImage from '../../../assets/headlight-repair.jpg';
 import carServiceImage from '../../../assets/car-service.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const services = [
   {
@@ -20,6 +21,7 @@ const services = [
 ];
 
 export default function PopularServices() {
+  const navigate = useNavigate(); 
   return (
     <section
       id="services"
@@ -57,6 +59,7 @@ export default function PopularServices() {
 
                 <Button
                   label="Boka tjänst"
+                  onClick={() => navigate('/services')}
                   className="mt-6 cursor-pointer"
                 />
               </div>

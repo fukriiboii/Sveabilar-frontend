@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+
 import AdminLayout from '././layouts/AdminLayout';
 import PublicLayout from '././layouts/PublicLayout';
 
@@ -17,6 +19,14 @@ import BookingDetailsPage from '../features/booking/pages/BookingDetailsPage';
 import AdminCreateBookingPage from '../features/booking/pages/AdminCreateBookingPage';
 import CustomerBookingPage from '../features/booking/pages/CustomerBookingPage';
 import AdminAvailabilityPage from '../features/availability/pages/AdminAvailabilityPage';
+import LoginModal from '../features/auth/components/LoginModal';
+import ContactPage from '../features/contact/pages/ContactPage';
+
+function AdminLoginPage() {
+  const navigate = useNavigate();
+
+  return <LoginModal isOpen={true} onClose={() => navigate('/')} />;
+}
 
 export const router = createBrowserRouter([
   {
@@ -48,9 +58,19 @@ export const router = createBrowserRouter([
       },
 
       {
+        path: '/admin-login',
+        element: <AdminLoginPage />,
+      },
+
+      {
         path: '/policy',
         element: <PolicyPage />,
       },
+
+      {
+        path: '/contact',
+        element: <ContactPage />
+      }
     ],
   },
 

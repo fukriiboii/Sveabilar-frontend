@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone } from 'lucide-react';
-import Button from './Button';
 import logo from '../../assets/logo.png';
-import LoginModal from '../../features/auth/components/LoginModal';
 
 const phoneNumber = '070-123 45 67';
 const phoneLink = 'tel:+46701234567';
@@ -13,10 +11,10 @@ const navItems = [
   { label: 'BILAR', href: '/cars' },
   { label: 'TJÄNSTER', href: '/services' },
   { label: 'OM OSS', href: '/about' },
+  { label: 'KONTAKTA OSS', href: '/contact'},
 ];
 
 export default function Header() {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function closeMenu() {
@@ -56,11 +54,14 @@ export default function Header() {
               <span>{phoneNumber}</span>
             </a>
 
-            <Button
+            {/**
+             <Button
               label="Logga in"
               onClick={() => setIsLoginOpen(true)}
               className="hidden md:block"
             />
+             */}
+            
 
             <button
               type="button"
@@ -111,19 +112,20 @@ export default function Header() {
                 </Link>
               ))}
 
-              <Button
+              {/**
+               <Button
                 label='Logga in'
                 onClick={() => {setIsLoginOpen(true);
                   closeMenu();
                 }}
                 className="mt-3 w-full border-t border-brand-border pt-4"
               />
+               */}
+              
             </div>
           </nav>
         )}
       </header>
-
-      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </>
   );
 }
