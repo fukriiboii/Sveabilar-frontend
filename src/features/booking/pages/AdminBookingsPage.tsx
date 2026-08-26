@@ -1,4 +1,6 @@
 import {
+  ChevronLeft,
+  ChevronRight,
   CalendarDays,
   Clock3,
   Plus,
@@ -17,12 +19,20 @@ export default function AdminBookingsPage() {
     bookings,
     date,
     status,
+    currentPage,
+    totalPages,
+    totalElements,
     isLoading,
     error,
     setDate,
     setStatus,
+    goToPreviousPage,
+    goToNextPage,
     resetFilters,
   } = useBookings();
+
+  const isFirstPage = currentPage === 0;
+  const isLastPage = totalPages === 0 || currentPage >= totalPages - 1;
 
   function handleCreateBooking() {
     navigate('/admin/bookings/new');
@@ -116,12 +126,38 @@ export default function AdminBookingsPage() {
         {!isLoading && !error && bookings.length > 0 && (
           <>
             <div className="border-b border-brand-border px-6 py-4">
-              <p className="text-sm text-brand-text-muted">
-                {bookings.length}{' '}
-                {bookings.length === 1
-                  ? 'bokning'
-                  : 'bokningar'}
-              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-brand-text-muted">
+                  Visar {bookings.length} av {totalElements}{' '}
+                  {totalElements === 1 ? 'bokning' : 'bokningar'}
+                </p>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={goToPreviousPage}
+                    disabled={isFirstPage}
+                    className="inline-flex items-center gap-1 rounded-lg border border-brand-border px-3 py-1.5 text-sm text-brand-text transition hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <ChevronLeft size={16} />
+                    Föregående
+                  </button>
+
+                  <span className="min-w-[80px] text-center text-sm text-brand-text-muted">
+                    Sida {totalPages === 0 ? 0 : currentPage + 1} / {totalPages}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={goToNextPage}
+                    disabled={isLastPage}
+                    className="inline-flex items-center gap-1 rounded-lg border border-brand-border px-3 py-1.5 text-sm text-brand-text transition hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    Nästa
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
             </div>
 
             <BookingTable bookings={bookings} />

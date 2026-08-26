@@ -1,20 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAvailabilityMonth } from '../../availability/hooks/useAvailabilityMonth';
 import { useAvailableTimes } from '../../availability/hooks/useAvailableTimes';
+import { useServices } from '../../services/hooks/useServices';
 import { useCreateBooking } from './useCreateBooking';
 import type {
   CreateBookingRequest,
   ServiceType,
 } from '../types/booking.types';
 
-const SERVICE_LABELS: Record<ServiceType, string> = {
+const FALLBACK_SERVICE_LABELS: Record<ServiceType, string> = {
   TIRE_CHANGE: 'Däckbyte',
+  HEADLIGHT_REPAIR: 'Strålkastare',
+  CAR_SERVICE: 'Bilservice',
 };
 
-const SERVICE_PRICES: Record<ServiceType, number> = {
-  TIRE_CHANGE: 499,
+const FALLBACK_SERVICE_PRICES: Record<ServiceType, number> = {
+  TIRE_CHANGE: 1290,
+  HEADLIGHT_REPAIR: 0,
+  CAR_SERVICE: 0,
 };
 
 export const TIRE_SIZE_OPTIONS = [
@@ -32,6 +37,7 @@ export function useCustomerBookingForm() {
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
   const [availabilityId, setAvailabilityId] = useState<number | null>(null);
   const [tireSize, setTireSize] = useState<TireSizeOption>('UP_TO_17');
@@ -45,6 +51,7 @@ export function useCustomerBookingForm() {
     (searchParams.get('service') as ServiceType | null) ?? 'TIRE_CHANGE';
 
   const [serviceType, setServiceType] = useState<ServiceType>(initialService);
+  const lastAppliedServiceParam = useRef<string | null>(null);
 
   const year = currentMonth.getFullYear();
   const month = currentMonth.getMonth();
@@ -69,12 +76,58 @@ export function useCustomerBookingForm() {
     error: availabilityError,
   } = useAvailableTimes(selectedDate);
 
+  const { services: serviceCatalog, isLoading: isLoadingServices } = useServices();
+
+  const serviceLabels = useMemo(() => {
+    const labels = { ...FALLBACK_SERVICE_LABELS } as Record<ServiceType, string>;
+
+    serviceCatalog.forEach((service) => {
+      labels[service.type as ServiceType] = service.name;
+    });
+
+    return labels;
+  }, [serviceCatalog]);
+
+  const serviceOptions = useMemo(
+    () => {
+      const availableOptions = serviceCatalog
+        .filter((service) => service.available && !service.requiresQuote)
+        .map((service) => ({
+          type: service.type as ServiceType,
+          name: service.name,
+          price: service.price ?? 0,
+        }));
+
+      if (availableOptions.length > 0) {
+        return availableOptions;
+      }
+
+      return (Object.entries(FALLBACK_SERVICE_LABELS) as [ServiceType, string][]).map(
+        ([type, name]) => ({
+          type,
+          name,
+          price: FALLBACK_SERVICE_PRICES[type],
+        }),
+      );
+    },
+    [serviceCatalog],
+  );
+
+  const activeService = useMemo(
+    () =>
+      serviceOptions.find((option) => option.type === serviceType) ??
+      serviceOptions[0] ??
+      {
+        type: 'TIRE_CHANGE' as ServiceType,
+        name: FALLBACK_SERVICE_LABELS.TIRE_CHANGE,
+        price: FALLBACK_SERVICE_PRICES.TIRE_CHANGE,
+      },
+    [serviceOptions, serviceType],
+  );
+
   const { createBooking, isCreating, error: createError } = useCreateBooking();
 
-  const activePrice = useMemo(
-    () => SERVICE_PRICES[serviceType] ?? 0,
-    [serviceType],
-  );
+  const activePrice = useMemo(() => activeService.price, [activeService]);
 
   const selectedTireSize = useMemo(
     () =>
@@ -83,7 +136,8 @@ export function useCustomerBookingForm() {
     [tireSize],
   );
 
-  const estimatedTotalPrice = activePrice + selectedTireSize.extra;
+  const estimatedTotalPrice =
+    activePrice + (serviceType === 'TIRE_CHANGE' ? selectedTireSize.extra : 0);
 
   useEffect(() => {
     setAvailabilityId(null);
@@ -92,10 +146,33 @@ export function useCustomerBookingForm() {
   useEffect(() => {
     const paramService = searchParams.get('service') as ServiceType | null;
 
-    if (paramService && paramService !== serviceType) {
-      setServiceType(paramService);
+    const isNewServiceParam =
+      paramService !== null && paramService !== lastAppliedServiceParam.current;
+
+    if (isNewServiceParam) {
+      const matchingService = serviceOptions.find(
+        (option) => option.type === paramService,
+      );
+
+      if (matchingService) {
+        setServiceType(matchingService.type);
+      }
+
+      lastAppliedServiceParam.current = paramService;
     }
-  }, [searchParams, serviceType]);
+
+    if (!serviceOptions.length) {
+      return;
+    }
+
+    const isCurrentServiceAvailable = serviceOptions.some(
+      (option) => option.type === serviceType,
+    );
+
+    if (!isCurrentServiceAvailable) {
+      setServiceType(serviceOptions[0].type);
+    }
+  }, [searchParams, serviceOptions, serviceType]);
 
   useEffect(() => {
     if (selectedDate && isDateBeforeToday(selectedDate)) {
@@ -157,6 +234,7 @@ export function useCustomerBookingForm() {
       address,
       availabilityId,
       serviceType,
+      termsAccepted,
     };
 
     const booking = await createBooking(request);
@@ -177,6 +255,8 @@ export function useCustomerBookingForm() {
     setCustomerPhone,
     address,
     setAddress,
+    termsAccepted,
+    setTermsAccepted,
     selectedDate,
     setSelectedDate,
     availabilityId,
@@ -200,7 +280,9 @@ export function useCustomerBookingForm() {
     activePrice,
     selectedTireSize,
     estimatedTotalPrice,
-    serviceLabels: SERVICE_LABELS,
+    serviceLabels,
+    serviceOptions,
+    isLoadingServices,
     tireSizeOptions: TIRE_SIZE_OPTIONS,
     handleSubmit,
     goToPreviousMonth,

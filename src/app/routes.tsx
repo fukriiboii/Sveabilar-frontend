@@ -21,6 +21,8 @@ import CustomerBookingPage from '../features/booking/pages/CustomerBookingPage';
 import AdminAvailabilityPage from '../features/availability/pages/AdminAvailabilityPage';
 import LoginModal from '../features/auth/components/LoginModal';
 import ContactPage from '../features/contact/pages/ContactPage';
+import FaqPage from '../features/faq/pages/FaqPage';
+import BookingTermsPage from '../features/policy/pages/BookingTermsPage';
 
 function AdminLoginPage() {
   const navigate = useNavigate();
@@ -70,6 +72,16 @@ export const router = createBrowserRouter([
       {
         path: '/contact',
         element: <ContactPage />
+      },
+
+      {
+        path: '/faq',
+        element: <FaqPage />
+      },
+
+      {
+        path: '/booking-terms',
+        element: <BookingTermsPage />
       }
     ],
   },

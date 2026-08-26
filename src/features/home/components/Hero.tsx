@@ -19,11 +19,11 @@ export default function Hero() {
             Professionell bilservice
           </p>
 
-          <h1 className="font-serif text-4xl leading-tight text-brand-text sm:text-5xl md:text-6xl">
-            Vi tar hand om din bil
+          <h1 className="max-w-[680px] font-serif text-4xl leading-[0.95] text-brand-text sm:text-5xl md:text-6xl">
+            Vi tar hand om din bil <span className="whitespace-nowrap">hos dig</span>
           </h1>
 
-          <p className="mt-5 max-w-xl font-serif text-base leading-7 text-brand-text-muted sm:text-lg">
+          <p className="mt-5 max-w-xl font-serif text-base leading-7 text-brand-text-muted sm:text-xl">
             Smidig bokning, professionell service och noggrant utfört arbete.
             Oavsett om det gäller däck, bilvård eller enklare underhåll ser vi
             till att din bil är i goda händer.

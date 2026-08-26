@@ -1,27 +1,27 @@
 const team = [
   {
-    name: 'Fikret',
-    role: 'Serviceledare',
-    description: 'Ansvarar för kvalitet, kundupplevelse och driftsäkerhet i varje servicebesök.',
+    name: 'Fiko',
+    role: 'VD',
+    description: 'Ansvarar för företagets utveckling, strategi och övergripande verksamhet.',
     initials: 'FK',
   },
   {
-    name: 'Faruk ',
-    role: 'Tekniker',
-    description: 'Specialiserad på diagnostik, service och reparation av bilens viktiga system.',
+    name: 'Filip',
+    role: 'Servicetekniker',
+    description: 'Utför service, bilvård, reparationer och underhåll med fokus på kvalitet och säkerhet.',
     initials: 'FK',
   },
   {
-    name: 'Fahri',
-    role: 'Kundansvarig',
-    description: 'Hjälper kunder med bokning, support och trygg kommunikation från första samtal.',
+    name: 'Fredrik',
+    role: 'Kund & Marknadsansvarig',
+    description: 'Ansvarar för kundkontakt, bokningar och företagets kommunikation och synlighet.',
     initials: 'FK',
   },
   {
-    name: 'Furkan',
-    role: 'Däckspecialist',
-    description: 'Fokuserar på däck, säkerhet och rätt lösning för varje körstil och bilmodell.',
-    initials: 'FK',
+    name: 'Albin',
+    role: 'Verkstadschef',
+    description: 'Ansvarar för den dagliga driften och ser till att arbetet utförs effektivt och professionellt.',
+    initials: 'AK',
   },
 ];
 

@@ -4,7 +4,9 @@ export type BookingStatus =
   | 'COMPLETED';
 
 export type ServiceType =
-  | 'TIRE_CHANGE';
+  | 'TIRE_CHANGE'
+  | 'HEADLIGHT_REPAIR'
+  | 'CAR_SERVICE';
 
 export type Booking = {
   id: number;
@@ -20,6 +22,16 @@ export type Booking = {
   createdAt: string;
 };
 
+export type BookingPage = {
+  content: Booking[];
+  number: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
+};
+
 export type CreateBookingRequest = {
   customerName: string;
   customerEmail: string;
@@ -27,4 +39,5 @@ export type CreateBookingRequest = {
   address: string;
   availabilityId: number;
   serviceType: ServiceType;
+  termsAccepted?: boolean;
 };

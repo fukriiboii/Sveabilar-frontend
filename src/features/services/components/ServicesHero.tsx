@@ -19,13 +19,16 @@ export default function ServicesHero() {
           </div>
 
           <h1 className="max-w-3xl font-serif text-5xl leading-[1.05] text-brand-text sm:text-6xl md:text-7xl">
-            Service som håller dig på vägen
+            Service som håller dig trygg på vägen
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-8 text-brand-text-muted sm:text-lg">
-            Vi erbjuder professionell hjälp för däck, belysning, service och
-            reparationer. Allt med fokus på säkerhet, kvalitet och ett tryggt
-            resultat.
+            Vi erbjuder professionella tjänster inom däck, belysning, service och reparationer,
+            <span className="relative mx-1 inline-block font-medium text-brand-text">
+              direkt på plats hos dig
+              <span className="absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-brand-gold" />
+            </span>
+            . Med fokus på säkerhet, kvalitet och noggrant utfört arbete ser vi till att din bil är i trygga händer.
           </p>
         </div>
       </div>

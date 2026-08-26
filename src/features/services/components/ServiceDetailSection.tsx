@@ -13,6 +13,7 @@ type ServiceDetailSectionProps = {
   isAvailable: boolean;
   bookingHref?: string;
   startingPrice?: number;
+  buttonLabel?: string;
   reversed?: boolean;
 };
 
@@ -27,6 +28,7 @@ export default function ServiceDetailSection({
   isAvailable,
   bookingHref,
   startingPrice,
+  buttonLabel,
   reversed = false,
 }: ServiceDetailSectionProps) {
 
@@ -106,11 +108,11 @@ export default function ServiceDetailSection({
 
             <div>
               <p className='text-xs font-semibold uppercase tracking-[0.2em] text-slate-500'>
-                Från
+                {startingPrice ? 'Från' : 'Pris'}
               </p>
 
               <p className='mt-2 text-3xl font-bold text-brand-bg'>
-                {startingPrice ? `${startingPrice} kr` : 'Pris ej satt'}
+                {startingPrice ? `${startingPrice} kr` : 'Pris på offert'}
               </p>
             </div>
 
@@ -132,7 +134,7 @@ export default function ServiceDetailSection({
             {isAvailable && bookingHref ? (
               <Link to={bookingHref}>
                 <Button
-                  label="Boka däckbyte"
+                  label={buttonLabel ?? 'Boka tjänst'}
                   variant="primary"
                 />
               </Link>

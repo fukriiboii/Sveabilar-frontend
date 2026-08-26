@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Phone } from 'lucide-react';
 import logo from '../../assets/logo.png';
 
-const phoneNumber = '070-123 45 67';
+const phoneNumber = '073-397 64 25';
 const phoneLink = 'tel:+46701234567';
 
 const navItems = [

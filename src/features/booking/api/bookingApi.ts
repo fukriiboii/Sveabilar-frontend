@@ -1,6 +1,7 @@
 import { apiClient } from '../../../shared/api/apiClient';
 import type {
   Booking,
+  BookingPage,
   BookingStatus,
   CreateBookingRequest,
 } from '../types/booking.types';
@@ -8,11 +9,13 @@ import type {
 type GetBookingsParams = {
   date?: string;
   status?: BookingStatus;
+  page?: number;
+  size?: number;
 };
 
 export async function getBookings(
   params?: GetBookingsParams,
-): Promise<Booking[]> {
+): Promise<BookingPage> {
   const searchParams = new URLSearchParams();
 
   if (params?.date) {
@@ -23,9 +26,17 @@ export async function getBookings(
     searchParams.set('status', params.status);
   }
 
+  if (params?.page !== undefined) {
+    searchParams.set('page', String(params.page));
+  }
+
+  if (params?.size !== undefined) {
+    searchParams.set('size', String(params.size));
+  }
+
   const query = searchParams.toString();
 
-  return apiClient<Booking[]>(
+  return apiClient<BookingPage>(
     `/api/admin/bookings${query ? `?${query}` : ''}`,
   );
 }
@@ -33,10 +44,14 @@ export async function getBookings(
 export async function getTodayBookings(): Promise<Booking[]> {
   const today = new Date().toISOString().split('T')[0];
 
-  return getBookings({
+  const page = await getBookings({
     date: today,
     status: 'CONFIRMED',
+    page: 0,
+    size: 100,
   });
+
+  return page.content;
 }
 
 export async function getBookingById(

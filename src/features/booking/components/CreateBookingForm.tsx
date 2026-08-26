@@ -40,6 +40,10 @@ export default function CreateBookingForm({
       ((searchParams.get('service') as ServiceType | null) ?? 'TIRE_CHANGE'),
   );
 
+  const serviceOptions = [
+    { type: 'TIRE_CHANGE', name: 'Däckbyte', price: 1290 },
+  ];
+
   const {
     availabilities,
     isLoading: isLoadingTimes,
@@ -199,9 +203,11 @@ export default function CreateBookingForm({
               }
               className="w-full rounded-lg border border-brand-border bg-brand-surface-2 px-3 py-2.5 text-sm text-brand-text outline-none transition focus:border-brand-gold"
             >
-              <option value="TIRE_CHANGE">
-                Däckbyte
-              </option>
+              {serviceOptions.map((option) => (
+                <option key={option.type} value={option.type}>
+                  {option.name}
+                </option>
+              ))}
             </select>
           </div>
 

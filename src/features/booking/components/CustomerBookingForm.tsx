@@ -16,6 +16,8 @@ export default function CustomerBookingForm() {
     setCustomerPhone,
     address,
     setAddress,
+    termsAccepted,
+    setTermsAccepted,
     selectedDate,
     setSelectedDate,
     availabilityId,
@@ -24,6 +26,7 @@ export default function CustomerBookingForm() {
     setTireSize,
     serviceType,
     setServiceType,
+    serviceOptions,
     bookingConfirmed,
     currentMonth,
     isLoadingMonth,
@@ -59,7 +62,7 @@ export default function CustomerBookingForm() {
         </p>
         <h2 className="mt-3 text-3xl font-semibold text-slate-900">Tack för din bokning</h2>
         <p className="mt-3 text-sm text-slate-600">
-          Vi har tagit emot din bokningsförfrågan och kontaktar dig så snart vi bekräftat tiden.
+          Du får en bekräftelse på mejl med din bokning. 
         </p>
 
         <div className="mt-6">
@@ -111,6 +114,7 @@ export default function CustomerBookingForm() {
             <BookingServiceSection
               serviceType={serviceType}
               setServiceType={setServiceType}
+              serviceOptions={serviceOptions}
               tireSize={tireSize}
               setTireSize={setTireSize}
               activePrice={activePrice}
@@ -146,12 +150,14 @@ export default function CustomerBookingForm() {
             setCustomerEmail={setCustomerEmail}
             address={address}
             setAddress={setAddress}
+            termsAccepted={termsAccepted}
+            setTermsAccepted={setTermsAccepted}
             createError={createError}
           />
 
           <div className="mt-6">
             <Button
-              label={isCreating ? 'Skapar bokning...' : 'Skicka bokningsförfrågan'}
+              label={isCreating ? 'Skapar bokning...' : 'Boka'}
               type="submit"
               disabled={isCreating || !availabilityId}
             />

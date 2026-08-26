@@ -12,6 +12,8 @@ const quickLinks = [
   { label: 'Bilar', href: '/cars' },
   { label: 'Tjänster', href: '/services' },
   { label: 'Om oss', href: '/about' },
+  { label: 'Kontakta oss', href: '/contact'},
+  { label: 'FAQ', href: '/faq'},
   { label: 'Integritet & cookies', href: '/policy'}
 ];
 
@@ -71,7 +73,7 @@ export default function Footer() {
               className="flex items-center gap-3 transition-colors hover:text-brand-gold"
             >
               <Mail size={18} />
-              <span>info@sveabilar.se</span>
+              <span>info@sveabilarochdäck.se</span>
             </a>
 
             <div className="flex items-center gap-3">
@@ -89,8 +91,12 @@ export default function Footer() {
 
       <div className="border-t border-brand-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm text-brand-text-muted sm:px-6 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Sveabilar och Däck AB</p>
-          <p>Alla rättigheter förbehållna</p>
+          <p>© 2026 Sveabilar och Däck AB | Alla rättigheter förbehållna</p>
+
+          <p className=' text-center md:text-right'>
+            Powered by <a href='https://excetra.se/'>Excetra.se</a> 
+          </p>
+
         </div>
       </div>
     </footer>

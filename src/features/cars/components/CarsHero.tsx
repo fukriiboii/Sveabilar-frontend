@@ -27,8 +27,7 @@ export default function CarsHero() {
           {/* Description */}
           <p className="mt-7 max-w-2xl text-base leading-8 text-brand-text-muted sm:text-lg">
             Vi arbetar just nu med att bygga upp vårt bilutbud. Snart hittar
-            du noggrant utvalda bilar hos Sveabilar, med fokus på kvalitet,
-            trygghet och en smidig bilaffär.
+            du noggrant utvalda bilar hos Sveabilar.
           </p>
 
           {/* Status */}

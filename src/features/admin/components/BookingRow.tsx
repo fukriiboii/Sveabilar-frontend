@@ -62,6 +62,8 @@ function formatServiceType(
     string
   > = {
     TIRE_CHANGE: 'Däckbyte',
+    HEADLIGHT_REPAIR: 'Strålkastare',
+    CAR_SERVICE: 'Bilservice',
   };
 
   return serviceLabels[serviceType] ?? serviceType;

@@ -1,69 +1,46 @@
+import { useMemo } from 'react';
+
 import ServicesHero from '../components/ServicesHero';
 import ServiceDetailSection from '../components/ServiceDetailSection';
+import { getServiceFeatures } from '../data/serviceFeatures';
+import { useServices } from '../hooks/useServices';
 
 import tireChangeImage from '../../../assets/tire-change.jpg';
 import headlightRepairImage from '../../../assets/headlight-repair.jpg';
 import carServiceImage from '../../../assets/car-service.jpg';
 
-const services = [
-  {
-    number: '01',
-    eyebrow: 'Däckservice',
-    title: 'Däckbyte direkt hos dig',
-    description:
-      'Vi kommer till dig och utför däckbytet på plats. Smidigt, tryggt och tidsbesparande – utan att du behöver lämna hemmet eller arbetsplatsen.',
-    image: tireChangeImage,
-    imageAlt: 'Däckbyte på bil hos Sveabilar',
-    features: [
-      'Däckbyte inför säsong',
-      'Kontroll av däck och mönsterdjup',
-      'Professionellt utfört',
-      'Vi kommer till dig',
-    ],
-    isAvailable: true,
-    bookingHref: '/booking?service=TIRE_CHANGE',
-    startingPrice: 499,
-    reversed: false,
-  },
-
-  {
-    number: '02',
-    eyebrow: 'Strålkastarservice',
-    title: 'Ge dina strålkastare nytt liv',
-    description:
-      'Matta och slitna strålkastare påverkar både bilens utseende och sikten på vägen. Vi hjälper dig att återställa strålkastarnas funktion och utseende.',
-    image: headlightRepairImage,
-    imageAlt: 'Strålkastarservice på bil hos Sveabilar',
-    features: [
-      'Kontroll av strålkastare',
-      'Felsökning av belysning',
-      'Förbättrad ljusbild',
-      'Förbättrat utseende',
-    ],
-    isAvailable: false,
-    reversed: true,
-  },
-
-  {
-    number: '03',
-    eyebrow: 'Bilservice',
-    title: 'Service och reparation för din bil',
-    description:
-      'Vi hjälper dig med bilens löpande underhåll och enklare reparationer för att bilen ska fungera pålitligt och säkert i vardagen.',
-    image: carServiceImage,
-    imageAlt: 'Bilservice och reparation hos Sveabilar',
-    features: [
-      'Service och underhåll',
-      'Felsökning',
-      'Enklare reparationer',
-      'Professionell hjälp',
-    ],
-    isAvailable: false,
-    reversed: false,
-  },
-];
+const imageByType: Record<string, string> = {
+  TIRE_CHANGE: tireChangeImage,
+  HEADLIGHT_REPAIR: headlightRepairImage,
+  CAR_SERVICE: carServiceImage,
+};
 
 export default function ServicesPage() {
+  const { services, isLoading, error } = useServices();
+
+  const mappedServices = useMemo(
+    () =>
+      services.map((service, index) => ({
+        number: String(index + 1).padStart(2, '0'),
+        eyebrow: service.available ? (service.requiresQuote ? 'Pris på offert' : 'Tjänst') : 'Kommer snart',
+        title: service.name,
+        description: service.description,
+        image: imageByType[service.type] ?? carServiceImage,
+        imageAlt: service.name,
+        features: getServiceFeatures(service.type),
+        isAvailable: service.available,
+        bookingHref: service.available
+          ? service.requiresQuote
+            ? `/contact?service=${service.type}`
+            : `/booking?service=${service.type}`
+          : undefined,
+        startingPrice: service.available ? service.price ?? undefined : undefined,
+        buttonLabel: service.requiresQuote ? 'Begär offert' : 'Boka tjänst',
+        reversed: index % 2 === 1,
+      })),
+    [services],
+  );
+
   return (
     <main className="bg-brand-bg-primary text-brand-bg">
       <ServicesHero />
@@ -79,8 +56,8 @@ export default function ServicesPage() {
           </h2>
 
           <p className="mt-5 text-base leading-7 text-slate-600">
-            Vi erbjuder smidiga biltjänster med fokus på kvalitet,
-            trygghet och enkelhet.
+            Vi erbjuder smidiga biltjänster hos kunden med fokus på kvalitet,
+            trygghet och enkelhet. 
           </p>
         </div>
       </section>
@@ -90,17 +67,17 @@ export default function ServicesPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
             Prisguide
           </p>
-          <h3 className="mt-3 font-serif text-3xl text-brand-bg">Vår distans- och däckprislista</h3>
+          <h3 className="mt-3 font-serif text-3xl text-brand-bg text-center">Vår distans och däckprislista</h3>
 
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-slate-500">
-                Distans
+                Distans - Utgår från Bålsta
               </p>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>• Inom 10 km ingår i priset</li>
-                <li>• 10–20 km: +100 kr</li>
-                <li>• 20–30 km: +200 kr</li>
+                <li>• Inom 15 km ingår i priset</li>
+                <li>• 15 – 25 km: +100 kr</li>
+                <li>• 25 – 35 km: +150 kr</li>
               </ul>
             </div>
 
@@ -110,19 +87,31 @@ export default function ServicesPage() {
               </p>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li>• Upp till 17 tum: standardpris</li>
-                <li>• 17–20 tum: +100 kr</li>
-                <li>• 20–22 tum: +200 kr</li>
+                <li>• 18 – 20 tum: +100 kr</li>
+                <li>• 21 – 22 tum: +150 kr</li>
               </ul>
             </div>
           </div>
 
           <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-            <strong>Observera:</strong> Vid utebliven bokningstid debiteras 100 kr.
+            <strong>Observera:</strong> Vid avbokning mindre än 24 timmar före bokad tid tillkommer en avgift på 100 kr.
           </div>
         </div>
       </section>
 
-      {services.map((service) => (
+      {isLoading && (
+        <div className="px-4 pb-16 text-center text-sm text-slate-600 sm:px-6">
+          Hämtar tjänster...
+        </div>
+      )}
+
+      {!isLoading && error && (
+        <div className="px-4 pb-16 text-center text-sm text-red-600 sm:px-6">
+          {error}
+        </div>
+      )}
+
+      {!isLoading && !error && mappedServices.map((service) => (
         <ServiceDetailSection
           key={service.number}
           number={service.number}
@@ -135,6 +124,7 @@ export default function ServicesPage() {
           isAvailable={service.isAvailable}
           bookingHref={service.bookingHref}
           startingPrice={service.startingPrice}
+          buttonLabel={service.buttonLabel}
           reversed={service.reversed}
         />
       ))}

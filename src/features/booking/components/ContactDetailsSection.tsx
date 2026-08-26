@@ -11,6 +11,8 @@ type ContactDetailsSectionProps = {
   setCustomerEmail: (value: string) => void;
   address: string;
   setAddress: (value: string) => void;
+  termsAccepted: boolean;
+  setTermsAccepted: (value: boolean) => void;
   createError: string | null;
 };
 
@@ -23,6 +25,8 @@ export function ContactDetailsSection({
   setCustomerEmail,
   address,
   setAddress,
+  termsAccepted,
+  setTermsAccepted,
   createError,
 }: ContactDetailsSectionProps) {
   return (
@@ -72,6 +76,38 @@ export function ContactDetailsSection({
           icon={<MapPin size={15} />}
           required
         />
+
+        <label className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm text-slate-700">
+          <input
+            type="checkbox"
+            checked={termsAccepted}
+            onChange={(event) => setTermsAccepted(event.target.checked)}
+            required
+            className="mt-0.5 h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-400"
+          />
+
+          <span className="leading-6">
+            Jag godkänner{' '}
+            <a
+              href="/booking-terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-slate-900 underline decoration-slate-400 underline-offset-2 hover:decoration-slate-700"
+            >
+              bokningsvillkoren
+            </a>{' '}
+            och att mina uppgifter behandlas enligt{' '}
+            <a
+              href="/policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-slate-900 underline decoration-slate-400 underline-offset-2 hover:decoration-slate-700"
+            >
+              integritetspolicyn
+            </a>
+            .
+          </span>
+        </label>
       </div>
 
       {createError && (
