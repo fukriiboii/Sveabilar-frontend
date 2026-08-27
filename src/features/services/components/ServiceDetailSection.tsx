@@ -52,6 +52,8 @@ export default function ServiceDetailSection({
             <img
               src={image}
               alt={imageAlt}
+              loading="lazy"
+              decoding="async"
               className="relative z-10 h-[320px] w-full object-cover sm:h-[420px] md:h-[500px]"
             />
           </div>

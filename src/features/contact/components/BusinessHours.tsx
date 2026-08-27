@@ -2,9 +2,7 @@ import { Clock3, MapPinned } from 'lucide-react';
 import Button from '../../../shared/components/Button';
 
 const hours = [
-  { day: 'Måndag - Fredag', time: '08:00 - 18:00' },
-  { day: 'Lördag', time: '09:00 - 14:00' },
-  { day: 'Söndag', time: 'Stängt' },
+  { day: 'Måndag - Söndag', time: '08:00 - 20:00' }
 ];
 
 export function BusinessHours() {
@@ -43,8 +41,7 @@ export function BusinessHours() {
           <h3 className="mt-5 font-serif text-3xl leading-tight text-white">Vi hjälper kunder i hela regionen.</h3>
 
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Vi erbjuder service, däckbyte och rådgivning för privatpersoner och företag som vill ha en
-            pålitlig partner för sin bilvård.
+            Vi erbjuder service, däckbyte och rådgivning för privatpersoner och företag som vill ha en pålitlig partner för sin bilvård.
           </p>
 
           <div className="mt-8 space-y-3 text-slate-100">
@@ -54,7 +51,7 @@ export function BusinessHours() {
           </div>
 
           <div className="mt-8">
-            <a href="tel:+46701234567">
+            <a href="tel:+46733976426">
               <Button label="Ring för bokning" className="w-full rounded-xl" />
             </a>
           </div>

@@ -5,7 +5,7 @@ import {
   Phone,
 } from 'lucide-react';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.webp';
 
 const quickLinks = [
   { label: 'Hem', href: '/' },
@@ -32,7 +32,7 @@ export default function Footer() {
 
           <p className="mt-5 max-w-sm text-sm leading-6 text-brand-text-muted">
             Professionell bilservice, däckservice och reparation med fokus på
-            kvalitet och trygghet.
+            kvalitet och trygghet hos dig.
           </p>
         </div>
 
@@ -61,15 +61,15 @@ export default function Footer() {
 
           <div className="mt-5 flex flex-col gap-4 text-sm text-brand-text-muted">
             <a
-              href="tel:+46701234567"
+              href="tel:+46733976426"
               className="flex items-center gap-3 transition-colors hover:text-brand-gold"
             >
               <Phone size={18} />
-              <span>070-123 45 67</span>
+              <span>073-397 64 26</span>
             </a>
 
             <a
-              href="mailto:info@sveabilar.se"
+              href="mailto:info@sveabilarochdäck.se"
               className="flex items-center gap-3 transition-colors hover:text-brand-gold"
             >
               <Mail size={18} />
@@ -78,12 +78,12 @@ export default function Footer() {
 
             <div className="flex items-center gap-3">
               <MapPin size={18} />
-              <span>Er adress här</span>
+              <span>Bålsta</span>
             </div>
 
             <div className="flex items-center gap-3">
               <Clock3 size={18} />
-              <span>Mån–Fre: 08:00–17:00</span>
+              <span>Mån – Sön: 08:00–20:00</span>
             </div>
           </div>
         </div>

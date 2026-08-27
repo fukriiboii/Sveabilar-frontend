@@ -5,14 +5,18 @@ import ServiceDetailSection from '../components/ServiceDetailSection';
 import { getServiceFeatures } from '../data/serviceFeatures';
 import { useServices } from '../hooks/useServices';
 
-import tireChangeImage from '../../../assets/tire-change.jpg';
-import headlightRepairImage from '../../../assets/headlight-repair.jpg';
-import carServiceImage from '../../../assets/car-service.jpg';
+import tireChangeImage from '../../../assets/tire-change.webp';
+import headlightRepairImage from '../../../assets/headlight-repair.webp';
+import carServiceImage from '../../../assets/car-service.webp';
+import transportImage from '../../../assets/transport.webp';
+import repairImage from '../../../assets/repair.webp';
 
 const imageByType: Record<string, string> = {
   TIRE_CHANGE: tireChangeImage,
   HEADLIGHT_REPAIR: headlightRepairImage,
   CAR_SERVICE: carServiceImage,
+  CAR_TRANSPORT: transportImage,
+  MINOR_REPAIRS: repairImage,
 };
 
 export default function ServicesPage() {

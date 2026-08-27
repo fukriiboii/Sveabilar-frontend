@@ -62,7 +62,7 @@ export default function BookingTermsPage() {
             <h2 className="text-lg font-semibold text-brand-text">7. Kontakt</h2>
             <p className="mt-3">
               Har du frågor om villkoren är du välkommen att kontakta oss via
-              info@sveabilarochdack.se.
+              info@sveabilarochdäck.se.
             </p>
           </section>
         </div>

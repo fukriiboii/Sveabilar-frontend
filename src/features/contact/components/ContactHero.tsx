@@ -29,7 +29,7 @@ export function ContactHero() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href="tel:+46701234567">
+              <a href="tel:+46733976426">
                 <Button
                   label="Ring oss"
                   icon={<PhoneCall size={18} />}
@@ -37,7 +37,7 @@ export function ContactHero() {
                 />
               </a>
 
-              <a href="mailto:info@sveabilar.se">
+              <a href="mailto:info@sveabilarochdäck.se">
                 <Button
                   label="Skicka e-post"
                   variant="ghost"
@@ -71,26 +71,25 @@ export function ContactHero() {
             <div className="mt-7 space-y-5">
               <div className="rounded-2xl border border-white/10 bg-brand-surface/70 p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Telefon</p>
-                <a href="tel:+46701234567" className="mt-2 block text-2xl font-semibold text-white">
-                  070-123 45 67
+                <a href="tel:+46733976426" className="mt-2 block text-2xl font-semibold text-white">
+                  073-397 64 26
                 </a>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-brand-surface/70 p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400">E-post</p>
                 <a href="mailto:info@sveabilar.se" className="mt-2 block text-lg font-semibold text-white">
-                  info@sveabilar.se
+                  info@sveabilarochdäck.se
                 </a>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-brand-surface/70 p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Öppettider</p>
-                <p className="mt-2 text-base font-medium text-white">Mån–Fre 08:00–18:00</p>
-                <p className="text-base font-medium text-white">Lör 09:00–14:00</p>
+                <p className="mt-2 text-base font-medium text-white">Mån – Sön 08:00–20:00</p>
               </div>
             </div>
 
-            <a href="mailto:info@sveabilar.se" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold">
+            <a href="mailto:info@sveabilarochdäck.se" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-brand-gold">
               Skicka ett meddelande <ArrowRight size={16} />
             </a>
           </div>

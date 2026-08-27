@@ -59,7 +59,7 @@ export default function PolicyPage() {
             <h2 className="text-lg font-semibold text-brand-text">6. Kontakt</h2>
             <p className="mt-3">
               Om du har frågor om vår integritetspolicy eller cookies kan du kontakta oss på
-              info@sveabilar.se eller telefon 070-123 45 67.
+              info@sveabilarochdäck.se eller telefon 073-397 64 26.
             </p>
           </section>
         </div>

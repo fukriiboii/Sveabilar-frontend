@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone } from 'lucide-react';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.webp';
 
-const phoneNumber = '073-397 64 25';
-const phoneLink = 'tel:+46701234567';
+const phoneNumber = '073-397 64 26';
+const phoneLink = 'tel:+4633976426';
 
 const navItems = [
   { label: 'HEM', href: '/' },

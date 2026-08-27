@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../shared/components/Button';
-import heroImage from '../../../assets/heroImage.png';
+import heroImage from '../../../assets/heroImage.webp';
 import HeroFeatures from './HeroFeatures';
 
 export default function Hero() {
