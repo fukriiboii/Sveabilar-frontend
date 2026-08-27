@@ -17,16 +17,11 @@ export default function AboutStory() {
 
           <div className="relative space-y-6 rounded-3xl border border-brand-border bg-brand-bg-primary p-8 shadow-sm">
             <p className="text-base leading-8 text-slate-600">
-              Sveabilar och Däck AB startade med en enkel idé: att ge bilägare
-              en trygg, tydlig och professionell upplevelse när de behöver hjälp
-              med sin bil.
+              Sveabilar och Däck AB startade med en enkel idé: att göra det smidigare att få hjälp med bilen. Därför kommer vi till dig och utför arbetet på plats, hemma, på arbetsplatsen eller där bilen befinner sig.
             </p>
 
             <p className="text-base leading-8 text-slate-600">
-              Vi vill göra det enkelt att få rätt service, rätt råd och rätt
-              lösning — utan stress, krånglighet eller osäkerhet. Därför har vi
-              byggt vår verksamhet kring kvalitet, personlig service och ett
-              långsiktigt förtroende.
+              Vi vill göra det enkelt att få rätt service, rätt råd och rätt lösning utan att du behöver lägga tid på att ta bilen till en verkstad. Med fokus på kvalitet, personlig service och ett professionellt utförande strävar vi efter att göra varje servicebesök så enkelt och tryggt som möjligt.
             </p>
           </div>
         </div>

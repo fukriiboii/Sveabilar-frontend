@@ -1,8 +1,8 @@
 import Button from '../../../shared/components/Button';
 
-import tireChangeImage from '../../../assets/tire-change.jpg';
-import headlightRepairImage from '../../../assets/headlight-repair.jpg';
-import carServiceImage from '../../../assets/car-service.jpg';
+import tireChangeImage from '../../../assets/tire-change.webp';
+import headlightRepairImage from '../../../assets/headlight-repair.webp';
+import carServiceImage from '../../../assets/car-service.webp';
 import { useNavigate } from 'react-router-dom';
 
 const services = [
@@ -47,6 +47,8 @@ export default function PopularServices() {
               <img
                 src={service.image}
                 alt={service.title}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
               />
 

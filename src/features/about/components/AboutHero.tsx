@@ -1,4 +1,4 @@
-import heroImage from "../../../assets/heroImage.png";
+import heroImage from "../../../assets/heroImage.webp";
 export default function AboutHero() {
     return (
         <section className="relative isolate overflow-hidden bg-brand-bg bg-cover bg-center"
