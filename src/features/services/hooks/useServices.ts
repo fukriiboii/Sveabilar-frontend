@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { apiClient } from '../../../shared/api/apiClient';
+
 export type ServiceOption = {
   type: string;
   name: string;
@@ -18,13 +20,7 @@ export function useServices() {
   useEffect(() => {
     async function loadServices() {
       try {
-        const response = await fetch('/api/services');
-
-        if (!response.ok) {
-          throw new Error('Kunde inte hämta tjänster');
-        }
-
-        const data = (await response.json()) as ServiceOption[];
+        const data = await apiClient<ServiceOption[]>('/api/services');
         setServices(data);
         setError(null);
       } catch (loadError) {
