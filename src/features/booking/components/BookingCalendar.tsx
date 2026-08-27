@@ -59,7 +59,7 @@ export function BookingCalendar({
   return (
     <div>
       <div className="mb-3 flex items-center justify-between gap-3">
-        <p className="flex items-center gap-2 text-sm font-medium text-slate-700">
+        <p className="flex items-center gap-2 text-sm font-medium text-brand-text">
           <CalendarDays size={14} />
           Välj datum
         </p>
@@ -142,7 +142,7 @@ export function BookingCalendar({
 
       {selectedDate && (
         <div className="mt-5">
-          <p className="mb-3 flex items-center gap-2 text-sm font-medium text-slate-700">
+          <p className="mb-3 flex items-center gap-2 text-sm font-medium text-brand-text">
             <Clock size={14} />
             Ledig tid för {formatDisplayDate(selectedDate)}
           </p>

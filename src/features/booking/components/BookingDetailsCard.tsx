@@ -105,9 +105,11 @@ function formatServiceType(
     Booking['serviceType'],
     string
   > = {
-    TIRE_CHANGE: 'Däckbyte',
+    TIRE_CHANGE: 'Däckskifte',
     HEADLIGHT_REPAIR: 'Strålkastare',
     CAR_SERVICE: 'Bilservice',
+    CAR_TRANSPORT: 'Biltransport',
+    MINOR_REPAIRS: 'Mindre reparationer',
   };
 
   return serviceLabels[serviceType] ?? serviceType;

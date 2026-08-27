@@ -6,7 +6,9 @@ export type BookingStatus =
 export type ServiceType =
   | 'TIRE_CHANGE'
   | 'HEADLIGHT_REPAIR'
-  | 'CAR_SERVICE';
+  | 'CAR_SERVICE'
+  | 'CAR_TRANSPORT'
+  | 'MINOR_REPAIRS';
 
 export type Booking = {
   id: number;

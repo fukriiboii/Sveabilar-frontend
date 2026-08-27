@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import { CalendarDays, Clock, User } from 'lucide-react';
+import { CalendarDays, User } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 
 import Button from '../../../shared/components/Button';
+import { useAvailabilityMonth } from '../../availability/hooks/useAvailabilityMonth';
 import { useAvailableTimes } from '../../availability/hooks/useAvailableTimes';
+import { useServices } from '../../services/hooks/useServices';
+import { BookingCalendar } from './BookingCalendar';
 import { useCreateBooking } from '../hooks/useCreateBooking';
 import type {
   CreateBookingRequest,
@@ -30,25 +33,40 @@ export default function CreateBookingForm({
   const [customerPhone, setCustomerPhone] = useState('');
   const [address, setAddress] = useState('');
 
-  const [date, setDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
   const [availabilityId, setAvailabilityId] = useState<number | null>(
     null,
   );
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), 1);
+  });
 
   const [serviceType, setServiceType] = useState<ServiceType>(
     initialServiceType ??
       ((searchParams.get('service') as ServiceType | null) ?? 'TIRE_CHANGE'),
   );
 
-  const serviceOptions = [
-    { type: 'TIRE_CHANGE', name: 'Däckbyte', price: 1290 },
-  ];
+  const { services: serviceCatalog, isLoading: isLoadingServices } = useServices();
+
+  const serviceOptions = serviceCatalog
+    .filter((service) => service.available && !service.requiresQuote)
+    .map((service) => ({
+      type: service.type as ServiceType,
+      name: service.name,
+    }));
 
   const {
     availabilities,
     isLoading: isLoadingTimes,
     error: availabilityError,
-  } = useAvailableTimes(date);
+  } = useAvailableTimes(selectedDate);
+
+  const {
+    availabilities: monthAvailabilities,
+    isLoading: isLoadingMonth,
+    error: monthError,
+  } = useAvailabilityMonth(currentMonth.getFullYear(), currentMonth.getMonth());
 
   const {
     createBooking,
@@ -62,7 +80,7 @@ export default function CreateBookingForm({
    */
   useEffect(() => {
     setAvailabilityId(null);
-  }, [date]);
+  }, [selectedDate]);
 
   useEffect(() => {
     const paramService = searchParams.get('service') as ServiceType | null;
@@ -88,6 +106,7 @@ export default function CreateBookingForm({
       address,
       availabilityId,
       serviceType,
+      termsAccepted: true,
     };
 
     const booking = await createBooking(request);
@@ -203,7 +222,11 @@ export default function CreateBookingForm({
               }
               className="w-full rounded-lg border border-brand-border bg-brand-surface-2 px-3 py-2.5 text-sm text-brand-text outline-none transition focus:border-brand-gold"
             >
-              {serviceOptions.map((option) => (
+              {isLoadingServices && (
+                <option value="">Hämtar tjänster...</option>
+              )}
+
+              {!isLoadingServices && serviceOptions.map((option) => (
                 <option key={option.type} value={option.type}>
                   {option.name}
                 </option>
@@ -211,96 +234,46 @@ export default function CreateBookingForm({
             </select>
           </div>
 
-          {/* Date */}
-          <div>
-            <label
-              htmlFor="booking-date"
-              className="mb-2 flex items-center gap-2 text-sm font-medium text-brand-text"
-            >
-              <CalendarDays size={16} />
-              Datum
-            </label>
-
-            <input
-              id="booking-date"
-              type="date"
-              value={date}
-              min={getToday()}
-              onChange={(event) =>
-                setDate(event.target.value)
-              }
-              required
-              className="w-full rounded-lg border border-brand-border bg-brand-surface-2 px-3 py-2.5 text-sm text-brand-text outline-none transition focus:border-brand-gold"
-            />
-          </div>
-
-          {/* Available times */}
-          {date && (
-            <div>
-              <label className="mb-3 flex items-center gap-2 text-sm font-medium text-brand-text">
-                <Clock size={16} />
-                Ledig tid
-              </label>
-
-              {isLoadingTimes && (
-                <p className="text-sm text-brand-text-muted">
-                  Hämtar lediga tider...
-                </p>
-              )}
-
-              {!isLoadingTimes && availabilityError && (
-                <p className="text-sm text-red-400">
-                  {availabilityError}
-                </p>
-              )}
-
-              {!isLoadingTimes &&
-                !availabilityError &&
-                availabilities.length === 0 && (
-                  <p className="rounded-lg border border-brand-border bg-brand-surface-2 px-4 py-3 text-sm text-brand-text-muted">
-                    Inga lediga tider för valt datum.
-                  </p>
-                )}
-
-              {!isLoadingTimes &&
-                !availabilityError &&
-                availabilities.length > 0 && (
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {availabilities.map((availability) => {
-                      const isSelected =
-                        availabilityId === availability.id;
-
-                      return (
-                        <button
-                          key={availability.id}
-                          type="button"
-                          onClick={() =>
-                            setAvailabilityId(
-                              availability.id,
-                            )
-                          }
-                          className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition ${
-                            isSelected
-                              ? 'border-brand-gold bg-brand-gold text-brand-bg'
-                              : 'border-brand-border bg-brand-surface-2 text-brand-text hover:border-brand-gold'
-                          }`}
-                        >
-                          <Clock size={16} />
-
-                          {formatTime(
-                            availability.startTime,
-                          )}
-                          {' – '}
-                          {formatTime(
-                            availability.endTime,
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-            </div>
+          {/* Available dates and times */}
+          {isLoadingMonth && (
+            <p className="text-sm text-brand-text-muted">Hämtar lediga datum...</p>
           )}
+
+          {!isLoadingMonth && monthError && (
+            <p className="text-sm text-red-400">{monthError}</p>
+          )}
+
+          {!isLoadingMonth && !monthError && (
+            <BookingCalendar
+              currentMonth={currentMonth}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              futureMonthAvailabilities={monthAvailabilities.filter(
+                (availability) => !isDateBeforeToday(availability.date),
+              )}
+              dayAvailabilities={availabilities}
+              isLoadingTimes={isLoadingTimes}
+              availabilityError={availabilityError}
+              availabilityId={availabilityId}
+              setAvailabilityId={setAvailabilityId}
+              onPreviousMonth={() => setCurrentMonth((current) => new Date(
+                current.getFullYear(),
+                current.getMonth() - 1,
+                1,
+              ))}
+              onNextMonth={() => setCurrentMonth((current) => new Date(
+                current.getFullYear(),
+                current.getMonth() + 1,
+                1,
+              ))}
+              isMonthBeforeToday={(date) => {
+                const today = new Date();
+                return new Date(date.getFullYear(), date.getMonth(), 1)
+                  < new Date(today.getFullYear(), today.getMonth(), 1);
+              }}
+            />
+          )}
+
         </div>
       </section>
 
@@ -373,10 +346,9 @@ function FormField({
   );
 }
 
-function formatTime(time: string): string {
-  return time.slice(0, 5);
-}
+function isDateBeforeToday(dateString: string): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-function getToday(): string {
-  return new Date().toISOString().split('T')[0];
+  return new Date(`${dateString}T00:00:00`) < today;
 }

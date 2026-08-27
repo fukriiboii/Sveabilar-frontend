@@ -14,12 +14,16 @@ const FALLBACK_SERVICE_LABELS: Record<ServiceType, string> = {
   TIRE_CHANGE: 'Däckbyte',
   HEADLIGHT_REPAIR: 'Strålkastare',
   CAR_SERVICE: 'Bilservice',
+  CAR_TRANSPORT: 'Biltransport',
+  MINOR_REPAIRS: 'Mindre reparationer',
 };
 
 const FALLBACK_SERVICE_PRICES: Record<ServiceType, number> = {
   TIRE_CHANGE: 1290,
   HEADLIGHT_REPAIR: 0,
   CAR_SERVICE: 0,
+  CAR_TRANSPORT: 0,
+  MINOR_REPAIRS: 0,
 };
 
 export const TIRE_SIZE_OPTIONS = [
