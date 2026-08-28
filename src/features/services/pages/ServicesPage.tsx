@@ -4,6 +4,7 @@ import ServicesHero from '../components/ServicesHero';
 import ServiceDetailSection from '../components/ServiceDetailSection';
 import { getServiceFeatures } from '../data/serviceFeatures';
 import { useServices } from '../hooks/useServices';
+import SEO from '../../../shared/components/SEO';
 
 import tireChangeImage from '../../../assets/tire-change.webp';
 import headlightRepairImage from '../../../assets/headlight-repair.webp';
@@ -47,6 +48,12 @@ export default function ServicesPage() {
 
   return (
     <main className="bg-brand-bg-primary text-brand-bg">
+      <SEO
+        title="Våra tjänster"
+        description="Se våra tjänster inom däckskifte, strålkastarrenovering, bilservice, biltransport och mindre reparationer."
+        path="/services"
+      />
+
       <ServicesHero />
 
       <section className="px-4 py-16 sm:px-6 md:py-24">

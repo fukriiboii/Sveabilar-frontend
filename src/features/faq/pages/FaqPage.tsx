@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { faqCategories } from '../data/faqData';
+import SEO from '../../../shared/components/SEO';
 
 export default function FaqPage() {
   const [activeCategory, setActiveCategory] = useState<'services' | 'business'>('services');
@@ -11,6 +12,12 @@ export default function FaqPage() {
 
   return (
     <main className="bg-brand-bg-primary px-4 py-16 text-brand-bg sm:px-6 md:py-24">
+      <SEO
+        title="Vanliga frågor"
+        description="Hitta svar på vanliga frågor om Sveabilar och Däcks tjänster, bokningar och verksamhet."
+        path="/faq"
+      />
+
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">

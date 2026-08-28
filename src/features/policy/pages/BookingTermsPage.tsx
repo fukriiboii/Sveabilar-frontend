@@ -1,6 +1,14 @@
+import SEO from '../../../shared/components/SEO';
+
 export default function BookingTermsPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <SEO
+        title="Bokningsvillkor"
+        description="Läs villkoren som gäller när du bokar en tjänst hos Sveabilar och Däck."
+        path="/booking-terms"
+      />
+
       <div className="rounded-3xl border border-brand-border bg-brand-surface p-6 shadow-sm sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Bokningsvillkor

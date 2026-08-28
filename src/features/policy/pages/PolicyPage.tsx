@@ -1,6 +1,14 @@
+import SEO from '../../../shared/components/SEO';
+
 export default function PolicyPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <SEO
+        title="Integritet och cookies"
+        description="Läs Sveabilar och Däcks information om personuppgifter, cookies och hur vi hanterar kunddata."
+        path="/policy"
+      />
+
       <div className="rounded-3xl border border-brand-border bg-brand-surface p-6 shadow-sm sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">
           Policy
