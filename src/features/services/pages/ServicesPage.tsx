@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import ServicesHero from '../components/ServicesHero';
 import ServiceDetailSection from '../components/ServiceDetailSection';
@@ -139,6 +140,39 @@ export default function ServicesPage() {
           reversed={service.reversed}
         />
       ))}
+
+      <section className="border-t border-slate-200 bg-white px-4 py-16 sm:px-6 md:py-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+            Har du frågor?
+          </p>
+
+          <h2 className="mt-3 font-serif text-3xl text-brand-bg sm:text-4xl">
+            Vi hjälper dig att hitta rätt tjänst
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
+            Vid frågor om en tjänst är du välkommen att kontakta oss eller läsa
+            mer bland våra vanliga frågor.
+          </p>
+
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center bg-brand-bg px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-bg/90"
+            >
+              Kontakta oss
+            </Link>
+
+            <Link
+              to="/faq"
+              className="inline-flex items-center justify-center border border-brand-bg px-6 py-3 text-sm font-semibold text-brand-bg transition hover:bg-brand-bg hover:text-white"
+            >
+              Läs vanliga frågor
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
