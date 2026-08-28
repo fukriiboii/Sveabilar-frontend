@@ -3,7 +3,7 @@ import { faqCategories } from '../data/faqData';
 import SEO from '../../../shared/components/SEO';
 
 export default function FaqPage() {
-  const [activeCategory, setActiveCategory] = useState<'services' | 'business'>('services');
+  const [activeCategory, setActiveCategory] = useState<'services' | 'booking' | 'business'>('services');
 
   const currentCategory = useMemo(
     () => faqCategories.find((category) => category.key === activeCategory) ?? faqCategories[0],
