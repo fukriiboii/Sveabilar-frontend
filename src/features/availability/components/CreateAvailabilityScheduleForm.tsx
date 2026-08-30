@@ -34,6 +34,13 @@ const SLOT_DURATIONS = [
   { value: 60, label: '60 minuter' },
 ];
 
+const TIME_OPTIONS = Array.from({ length: 96 }, (_, index) => {
+  const hours = String(Math.floor(index / 4)).padStart(2, '0');
+  const minutes = String((index % 4) * 15).padStart(2, '0');
+
+  return `${hours}:${minutes}`;
+});
+
 type DatePickerTarget = 'start' | 'end' | null;
 
 function formatDate(date: string): string {
@@ -468,16 +475,20 @@ export default function CreateAvailabilityScheduleForm() {
                 Från
               </label>
 
-              <input
+              <select
                 id="availability-start-time"
-                type="time"
                 value={startTime}
                 onChange={(event) =>
                   setStartTime(event.target.value)
                 }
-                required
                 className="w-full rounded-lg border border-brand-border bg-brand-surface-2 px-3 py-2.5 text-sm text-brand-text outline-none transition focus:border-brand-gold"
-              />
+              >
+                {TIME_OPTIONS.map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* End */}
@@ -489,16 +500,20 @@ export default function CreateAvailabilityScheduleForm() {
                 Till
               </label>
 
-              <input
+              <select
                 id="availability-end-time"
-                type="time"
                 value={endTime}
                 onChange={(event) =>
                   setEndTime(event.target.value)
                 }
-                required
                 className="w-full rounded-lg border border-brand-border bg-brand-surface-2 px-3 py-2.5 text-sm text-brand-text outline-none transition focus:border-brand-gold"
-              />
+              >
+                {TIME_OPTIONS.map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Duration */}
